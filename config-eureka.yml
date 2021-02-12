@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    active: dev
+
+
+---
+server:
+  port: 7001
+spring:
+  profiles: dev     #开发环境
+  application:
+    name:springcloud-config-eureka
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      #http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:7002/eureka/,http://${eureka.instance.hostname}:7003/eureka/
+
+---
+server:
+  port: 7002
+spring:
+  profiles: test    #开发环境
+  application:
+    name:springcloud-config-eureka
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      #http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:7001/eureka/,http://${eureka.instance.hostname}:7003/eureka/
+
